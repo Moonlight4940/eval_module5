@@ -1,56 +1,56 @@
 CREATE TABLE IF NOT EXISTS medecin(
-id_medecin INTEGER PRIMARY KEY AUTOINCREMENT,
+id INTEGER PRIMARY KEY AUTOINCREMENT,
 nom VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS consultation(
-id_consultation INTEGER PRIMARY KEY AUTOINCREMENT,
+id INTEGER PRIMARY KEY AUTOINCREMENT,
 date DATE,
 prix DECIMAL(10, 2) NOT NULL,
-id_medecin INTEGER,
-FOREIGN KEY(id_medecin) REFERENCES medecin(id)
+medecin_id INTEGER,
+FOREIGN KEY(medecin_id) REFERENCES medecin(id)
 );
 
 CREATE TABLE malade (
-id_malade INTEGER PRIMARY KEY AUTOINCREMENT,
+id INTEGER PRIMARY KEY AUTOINCREMENT,
 nom VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE symptome (
-id_symptom INTEGER PRIMARY KEY AUTOINCREMENT,
+id INTEGER PRIMARY KEY AUTOINCREMENT,
 nom VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE maladie (
-id_maladie INTEGER PRIMARY KEY AUTOINCREMENT,
+id INTEGER PRIMARY KEY AUTOINCREMENT,
 nom VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE conserne (
-id_consultation INT,
-id_malade INT,
-FOREIGN KEY(id_consultation) REFERENCES consultation(id_consultation),
-FOREIGN KEY(id_malade) REFERENCES malade(id_malade)
+consultation_id INT,
+malade_id INT,
+FOREIGN KEY(consultation_id) REFERENCES consultation(id),
+FOREIGN KEY(malade_id) REFERENCES malade(id)
 );
 
 CREATE TABLE detecter (
-id_consultation INT,
-id_symptom INT,
-FOREIGN KEY(id_consultation) REFERENCES consultation(id_consultation),
-FOREIGN KEY(id_symptom) REFERENCES symptom(id_symptom)
+consultation_id INT,
+symptom_id INT,
+FOREIGN KEY(consultation_id) REFERENCES consultation(id),
+FOREIGN KEY(symptom_id) REFERENCES symptom(id)
 );
 
 CREATE TABLE diagnostiquer (
-id_consultation INT,
-id_maladie INT,
-FOREIGN KEY(id_consultation) REFERENCES consultation(id_consultation),
-FOREIGN KEY(id_maladie) REFERENCES symptom(id_maladie)
+consultation_id INT,
+maladie_id INT,
+FOREIGN KEY(consultation_id) REFERENCES consultation(id),
+FOREIGN KEY(maladie_id) REFERENCES symptom(id)
 );
 
 CREATE TABLE associer (
-id_symptom INT,
-id_maladie INT,
-FOREIGN KEY(id_symptom) REFERENCES symptom(id_symptom),
-FOREIGN KEY(id_maladie) REFERENCES maladie(id_maladie)
+symptom_id INT,
+maladie_id INT,
+FOREIGN KEY(symptom_id) REFERENCES symptom(id),
+FOREIGN KEY(maladie_id) REFERENCES maladie(id)
 );
 
